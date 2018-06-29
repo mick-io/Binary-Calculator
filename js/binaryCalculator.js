@@ -24,28 +24,9 @@ function updateDisplay() {
 }
 
 function calculate() {
-  if (secondValue === '') {
-    return;
-  }
-
-  let output;
-  firstValue = parseInt(firstValue, 2);
-  secondValue = parseInt(secondValue, 2);
-
-  switch (_operator) {
-    case '+':
-      output = firstValue + secondValue;
-      break;
-    case '-':
-      output = firstValue - secondValue;
-      break;
-    case '*':
-      output = firstValue * secondValue;
-      break;
-    case '/':
-      output = firstValue / secondValue;
-      break;
-  }
+  const stringIntValue1 = parseInt(firstValue, 2).toString();
+  const stringIntValue2 = parseInt(secondValue, 2).toString();
+  const output = eval(stringIntValue1 + _operator + stringIntValue2);
   document.getElementById('res').innerHTML = output.toString(2);
   setPrivateValuesToEmptyString();
 }
