@@ -1,9 +1,9 @@
 let firstValue = '';
 let secondValue = '';
-let operator = '';
+let _operator = '';
 
 function addNumber(number) {
-  if (!operator) {
+  if (!_operator) {
     firstValue += number;
   } else {
     secondValue += number;
@@ -11,24 +11,28 @@ function addNumber(number) {
   updateDisplay();
 }
 
-function addOperator(operand) {
-  if (!operator) {
-    operator += operand;
+function addOperator(operator) {
+  if (!_operator) {
+    _operator += operator;
     updateDisplay();
   }
 }
 
 function updateDisplay() {
-  const equation = firstValue + operator + secondValue;
+  const equation = firstValue + _operator + secondValue;
   document.getElementById('res').innerHTML = equation;
 }
 
 function calculate() {
+  if (secondValue === '') {
+    return;
+  }
+
   let output;
   firstValue = parseInt(firstValue, 2);
   secondValue = parseInt(secondValue, 2);
 
-  switch (operator) {
+  switch (_operator) {
     case '+':
       output = firstValue + secondValue;
       break;
@@ -43,11 +47,16 @@ function calculate() {
       break;
   }
   document.getElementById('res').innerHTML = output.toString(2);
+  setPrivateValuesToEmptyString();
 }
 
 function clearDisplay() {
+  setPrivateValuesToEmptyString();
+  updateDisplay();
+}
+
+function setPrivateValuesToEmptyString() {
   firstValue = '';
   secondValue = '';
-  operator = '';
-  document.getElementById('res').innerHTML = '';
+  _operator = '';
 }
